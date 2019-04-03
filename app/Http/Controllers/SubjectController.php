@@ -44,5 +44,24 @@ class SubjectController extends Controller
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));
     }
 
-    //
+    public function addChapter(Request $request){
+        $status = false;
+        $mesasge = "";
+        $file = $request->file('file');
+        $nama_file = $file->getClientOriginalName();
+
+        $newChapter = Chapter::insertGetId([
+            'guruid' => $request['guruid'],
+            'materialid' => $request['materialid'],
+            'chapter' => $request['chapter'],
+            'url' => 'tes url',
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+
+        if($newChapter){
+            $status = true;
+            $message = "Berhasil menambah bahan pelajaran";
+        }
+        return response()->json(array("status" => $status, "message" => $message, 'file' => $nama_file));
+    }
 }

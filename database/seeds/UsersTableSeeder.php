@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'admin',
             'password' => Hash::make('admin'),
         ]);
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'guru1',
             'password' => Hash::make('guru1'),
         ]);
@@ -37,6 +39,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'guru2',
             'password' => Hash::make('guru2'),
         ]);
@@ -46,6 +49,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'siswa1',
             'password' => Hash::make('siswa1'),
         ]);
@@ -55,6 +59,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'siswa2',
             'password' => Hash::make('siswa2'),
         ]);
@@ -64,6 +69,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'siswa3',
             'password' => Hash::make('siswa3'),
         ]);
@@ -73,6 +79,7 @@ class UsersTableSeeder extends Seeder
             'alamat' => Str::random(20),
             'email' => Str::random(10).'@gmail.com',
             'no_hp' => '081212121212',
+            'status' => 0,
             'username' => 'siswa4',
             'password' => Hash::make('siswa4'),
         ]);

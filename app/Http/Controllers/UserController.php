@@ -82,4 +82,21 @@ class UserController extends Controller
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));
     }
 
+    public function listUser(){
+        $status = false;
+        $message = "";
+        $result = array();
+
+        $user = User::whereNotIn('jenis_user', [0])->get();
+        // $user = User::all();
+
+        if(!$user->isEmpty()){
+            $status = true;
+            $message = "Berhasil";
+            $result = $user;
+        }
+
+        return response()->json(array("status" => $status, "message" => $message, "result" => $result));
+    }
+
 }

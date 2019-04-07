@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function() use ($router){
     $router->post('users/login', ['uses' => 'UserController@loginUser']);
     $router->post('users/register', ['uses' => 'UserController@registerUser']);
+    $router->get('users/list', ['uses' => 'UserController@listUser']);
     $router->get('users/aktivasi/{userid}', ['uses' => 'UserController@aktivasiUser']);
     $router->get('subjects', ['uses' => 'SubjectController@listAll']);
     $router->post('subjects/insert', ['uses' => 'SubjectController@addChapter']);

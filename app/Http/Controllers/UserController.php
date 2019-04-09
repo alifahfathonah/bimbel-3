@@ -88,7 +88,6 @@ class UserController extends Controller
         $result = array();
 
         $user = User::whereNotIn('jenis_user', [0])->get();
-        // $user = User::all();
 
         if(!$user->isEmpty()){
             $status = true;

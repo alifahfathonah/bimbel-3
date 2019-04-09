@@ -25,6 +25,8 @@ $app->withFacades();
 
 $app->withEloquent();
 
+// for custom config, if the .env can't work or can't executed in some hosting/server
+$app->configure('database');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -96,5 +98,6 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
 
 return $app;

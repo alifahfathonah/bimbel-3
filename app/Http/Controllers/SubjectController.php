@@ -47,6 +47,7 @@ class SubjectController extends Controller
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));
     }
 
+<<<<<<< Updated upstream
     public function addChapter(Request $request){
         $status = false;
         $message = "";
@@ -87,4 +88,11 @@ class SubjectController extends Controller
         
         return response()->json(array("status" => $status, "message" => $message, 'result' => $result));
     }
+=======
+    public function addChapter(){
+        
+    }
+
+    //
+>>>>>>> Stashed changes
 }

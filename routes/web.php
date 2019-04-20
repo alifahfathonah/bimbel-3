@@ -22,4 +22,6 @@ $router->group(['prefix' => 'api'], function() use ($router){
     $router->get('users/aktivasi/{userid}', ['uses' => 'UserController@aktivasiUser']);
     $router->get('subjects', ['uses' => 'SubjectController@listAll']);
     $router->post('subjects/insert', ['uses' => 'SubjectController@addChapter']);
+    $router->get('subjects/delete/{chapterid}', ['uses' => 'SubjectController@deleteChapter']);
+    $router->post('subjects/edit', ['uses' => 'SubjectController@editChapter']);
 });

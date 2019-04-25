@@ -42,4 +42,9 @@ $router->group(['prefix' => 'api'], function() use ($router){
     $router->post('results/insert', ['uses' => 'ResultsController@addResult']);
     $router->post('results/addnilai', ['uses' => 'ResultsController@addNilai']);
     // END //
+
+    // API untuk chat
+    $router->get('chats/list', ['uses' => 'ChatController@listChat']);
+    $router->post('chats/insert', ['uses' => 'ChatController@addChat']);
+    // END //
 });

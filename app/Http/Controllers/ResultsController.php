@@ -10,7 +10,7 @@ use App\Result;
 class ResultsController extends Controller
 {
 
-    private $path = '../public/jawaban/';
+    private $path = './jawaban/';
     /**
      * Create a new controller instance.
      *

@@ -10,7 +10,7 @@ use App\Exercise;
 class ExercisesController extends Controller
 {
 
-    private $path = '../public/latihan/';
+    private $path = './latihan/';
     /**
      * Create a new controller instance.
      *

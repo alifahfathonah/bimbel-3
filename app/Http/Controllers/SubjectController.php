@@ -11,7 +11,7 @@ use App\Chapter;
 class SubjectController extends Controller
 {
 
-    private $path = '../public/modul/';
+    private $path = './modul/';
     /**
      * Create a new controller instance.
      *

@@ -32,7 +32,11 @@ class SubjectController extends Controller
             $status = true;
             $message = "Berhasil, list data subjects";
             foreach($material as $key => $val_mat){
-                $chapter = Chapter::where('materialid', $val_mat['id'])->get()->toArray();
+                $chapter = Chapter::join('users', 'users.id', '=', 'chapters.guruid')
+                ->select('chapters.*', 'users.nama_lengkap')
+                ->where('materialid', $val_mat['id'])
+                ->get()
+                ->toArray();
                 $material[$key]['chapter'] = $chapter;
             }
             $result = $material;
@@ -58,6 +62,7 @@ class SubjectController extends Controller
         }else{
             $file = $request->file('file');
             $eks_file = $file->getClientOriginalExtension();
+            $ukuran = $file->getSize();
 
             $judul_simpan = str_replace(" ", "_", $request['chapter']);
             $nama_file_simpan = $request['guruid'] . "_" . $judul_simpan . "_" . date('Y-m-d') . "." . $eks_file;
@@ -69,6 +74,8 @@ class SubjectController extends Controller
                 'materialid' => $request['materialid'],
                 'chapter' => $request['chapter'],
                 'url' => url('/modul') . "/" . $nama_file_simpan,
+                'deskripsi' => $request->deskripsi,
+                'ukuran' => $ukuran,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
 
@@ -79,7 +86,7 @@ class SubjectController extends Controller
             }
         }
         
-        return response()->json(array("status" => $status, "message" => $message, 'result' => $result));
+        return response()->json(array("status" => $status, "message" => $message));
     }
 
     public function deleteChapter($chapterid){
@@ -132,6 +139,7 @@ class SubjectController extends Controller
             }else{
                 $file = $request->file('file');
                 $eks_file = $file->getClientOriginalExtension();
+                $ukuran =$file->getSize();
     
                 $judul_simpan = str_replace(" ", "_", $request['chapter']);
                 $nama_file_simpan = $request['guruid'] . "_" . $judul_simpan . "_" . date('Y-m-d') . "." . $eks_file;
@@ -142,13 +150,14 @@ class SubjectController extends Controller
                     'guruid' => $request['guruid'],
                     'materialid' => $request['materialid'],
                     'chapter' => $request['chapter'],
-                    'url' => url('/modul') . "/" . $nama_file_simpan
+                    'url' => url('/modul') . "/" . $nama_file_simpan,
+                    'deskripsi' => $request->deskripsi,
+                    'ukuran' => $ukuran
                 ]);
         
                 if($editChapter){
                     $status = true;
                     $message = "Berhasil mengedit bahan pelajaran";
-                    $result = $chapter;
                 }
             }
         }else{
@@ -161,10 +170,9 @@ class SubjectController extends Controller
             if($editChapter){
                 $status = true;
                 $message = "Berhasil mengedit bahan pelajaran";
-                $result = $chapter;
             }
         }
         
-        return response()->json(array("status" => $status, "message" => $message, 'result' => $result));
+        return response()->json(array("status" => $status, "message" => $message));
     }
 }

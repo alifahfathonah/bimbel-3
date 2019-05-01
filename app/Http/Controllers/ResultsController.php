@@ -26,7 +26,10 @@ class ResultsController extends Controller
         $message = "";
         $result = array();
 
-        $result_tabel = Result::where('exerciseid', $exerciseid)->get();
+        $result_tabel = Result::join('users', 'users.id', '=', 'results.siswaid')
+        ->select('results.*', 'users.nama_lengkap')
+        ->where('exerciseid', $exerciseid)
+        ->get();
 
         if(!$result_tabel->isEmpty()){
             $status = true;
@@ -42,7 +45,9 @@ class ResultsController extends Controller
         $message = "";
         $result = array();
 
-        $result_tabel = Result::where(['siswaid' => $siswaid, 'exerciseid' => $exerciseid])->get();
+        $result_tabel = Result::join('users', 'users.id', '=', 'results.siswaid')
+        ->select('results.*', 'users.nama_lengkap')
+        ->where(['siswaid' => $siswaid, 'exerciseid' => $exerciseid])->get();
 
         if(!$result_tabel->isEmpty()){
             $status = true;
@@ -70,6 +75,7 @@ class ResultsController extends Controller
         }else{
             $file = $request->file('file');
             $eks_file = $file->getClientOriginalExtension();
+            $ukuran = $file->getSize();
 
             // $judul_simpan = str_replace(" ", "_", $request['exercise']);
             $nama_file_simpan = $request['siswaid'] . "_" . $request['exerciseid'] . "_" . date('Y-m-d') . "." . $eks_file;
@@ -80,6 +86,7 @@ class ResultsController extends Controller
                 'siswaid' => $request['siswaid'],
                 'exerciseid' => $request['exerciseid'],
                 'url' => url('/jawaban') . "/" . $nama_file_simpan,
+                'ukuran' => $ukuran,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
 
@@ -90,7 +97,7 @@ class ResultsController extends Controller
             }
         }
         
-        return response()->json(array("status" => $status, "message" => $message, 'result' => $result));
+        return response()->json(array("status" => $status, "message" => $message));
     }
 
     public function addNilai(Request $request){

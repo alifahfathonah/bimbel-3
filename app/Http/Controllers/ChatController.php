@@ -23,7 +23,9 @@ class ChatController extends Controller
         $message = "";
         $result = array();
 
-        $chat = Chat::all();
+        $chat = Chat::join('users', 'users.id', '=', 'chats.userid')
+        ->select('chats.*', 'users.nama_lengkap')
+        ->get();
 
         if(!$chat->isEmpty()){
             $status = true;
@@ -43,7 +45,9 @@ class ChatController extends Controller
         if($insert){
             $status = true;
             $message = "Berhasil menambahkan chat";
-            $result = Chat::all();
+            $result = Chat::join('users', 'users.id', '=', 'chats.userid')
+            ->select('chats.*', 'users.nama_lengkap')
+            ->get();
         }
 
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));

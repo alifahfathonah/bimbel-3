@@ -31,7 +31,11 @@ class ExercisesController extends Controller
             $status = true;
             $message = "Berhasil, list data exercises";
             foreach($material as $key => $val_mat){
-                $exercise = Exercise::where('materialid', $val_mat['id'])->get()->toArray();
+                $exercise = Exercise::join('users', 'users.id', '=', 'exercises.guruid')
+                ->select('exercises.*', 'users.nama_lengkap')
+                ->where('materialid', $val_mat['id'])
+                ->get()
+                ->toArray();
                 $material[$key]['exercises'] = $exercise;
             }
             $result = $material;
@@ -57,6 +61,7 @@ class ExercisesController extends Controller
         }else{
             $file = $request->file('file');
             $eks_file = $file->getClientOriginalExtension();
+            $ukuran = $file->getSize();
 
             $judul_simpan = str_replace(" ", "_", $request['exercise']);
             $nama_file_simpan = $request['guruid'] . "_" . $judul_simpan . "_" . date('Y-m-d') . "." . $eks_file;
@@ -68,17 +73,17 @@ class ExercisesController extends Controller
                 'materialid' => $request['materialid'],
                 'exercise' => $request['exercise'],
                 'url' => url('/latihan') . "/" . $nama_file_simpan,
+                'ukuran' => $ukuran,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
 
             if($newExercise){
                 $status = true;
                 $message = "Berhasil menambah latihan";
-                $result = Exercise::where('id', $newExercise)->get()->toArray();
             }
         }
         
-        return response()->json(array("status" => $status, "message" => $message, 'result' => $result));
+        return response()->json(array("status" => $status, "message" => $message));
     }
 
     public function deleteExercise($exerciseid){

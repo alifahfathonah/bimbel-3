@@ -79,7 +79,7 @@ class UserController extends Controller
             $result = $insert;
         }
 
-        return response()->json(array("status" => $status, "message" => $message, "result" => $result));
+        return response()->json(array("status" => $status, "message" => $message));
     }
 
     public function listUser(){

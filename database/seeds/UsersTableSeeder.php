@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'admin',
             'password' => Hash::make('admin'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'jenis_user' => 1,
@@ -32,6 +33,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'guru1',
             'password' => Hash::make('guru1'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'jenis_user' => 1,
@@ -42,6 +44,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'guru2',
             'password' => Hash::make('guru2'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'jenis_user' => 2,
@@ -52,6 +55,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'siswa1',
             'password' => Hash::make('siswa1'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'jenis_user' => 2,
@@ -62,6 +66,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'siswa2',
             'password' => Hash::make('siswa2'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'jenis_user' => 2,
@@ -72,6 +77,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'siswa3',
             'password' => Hash::make('siswa3'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         DB::table('users')->insert([
             'jenis_user' => 2,
@@ -82,6 +88,7 @@ class UsersTableSeeder extends Seeder
             'status' => 0,
             'username' => 'siswa4',
             'password' => Hash::make('siswa4'),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
     }
 }

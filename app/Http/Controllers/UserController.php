@@ -72,7 +72,17 @@ class UserController extends Controller
         $message = "";
         $result = array();
 
-        $insert = User::create($request->all());
+        $insert = User::insertGetId([
+            'jenis_user' => $request['jenis_user'],
+            'nama_lengkap' => $request['nama_lengkap'],
+            'alamat' => $request['alamat'],
+            'email' => $request['email'],
+            'no_hp' => $request['no_hp'],
+            'status' => $request['status'],
+            'username' => $request['username'],
+            'password' => Hash::make($request['password']),
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
         if($insert){
             $status = true;
             $message = "Berhasil menambahkan user";

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Result extends Model{
 
     protected $fillable = [
-        'siswaid', 'exerciselid', 'url', 'nilai', 'keterangan', 'created_at', 'updated_at'
+        'siswaid', 'exerciselid', 'url', 'ukuran', 'nilai', 'keterangan', 'created_at', 'updated_at'
     ];
 
 }

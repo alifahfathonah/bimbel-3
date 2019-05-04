@@ -151,7 +151,7 @@ class SubjectController extends Controller
                     'materialid' => $request['materialid'],
                     'chapter' => $request['chapter'],
                     'url' => url('/modul') . "/" . $nama_file_simpan,
-                    'deskripsi' => $request->deskripsi,
+                    'deskripsi' => $request['deskripsi'],
                     'ukuran' => $ukuran
                 ]);
         
@@ -164,7 +164,8 @@ class SubjectController extends Controller
             $editChapter = $chapter->update([
                 'guruid' => $request['guruid'],
                 'materialid' => $request['materialid'],
-                'chapter' => $request['chapter']
+                'chapter' => $request['chapter'],
+                'deskripsi' => $request['deskripsi']
             ]);
 
             if($editChapter){

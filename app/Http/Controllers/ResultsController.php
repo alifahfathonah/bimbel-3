@@ -21,38 +21,44 @@ class ResultsController extends Controller
         //
     }
 
-    public function listAllGuru($exerciseid){
+    public function listAllGuru($guruid){
         $status = false;
-        $message = "";
+        $message = "Data tidak ada";
         $result = array();
 
-        $result_tabel = Result::join('users', 'users.id', '=', 'results.siswaid')
-        ->select('results.*', 'users.nama_lengkap')
-        ->where('exerciseid', $exerciseid)
+        $exercises = Exercise::join('users', 'users.id', '=', 'exercises.guruid')
+        ->select('exercises.id', 'exercises.guruid', 'exercises.exercise', 'users.nama_lengkap')
+        ->where('exercises.guruid', $guruid)
         ->get();
 
-        if(!$result_tabel->isEmpty()){
+        if(!$exercises->isEmpty()){
             $status = true;
-            $message = "Berhasil, list data result";
-            $result = $result_tabel;
+            $message = "Berhasil, list data results";
+            foreach($exercises as $key => $val_exe){
+                $results = Result::where('exerciseid', $val_exe['id'])->get();
+                $exercises[$key]['results'] = $results;
+            }
+            $result = $exercises;
         }
 
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));
     }
 
-    public function listAllSiswa($siswaid, $exerciseid){
+    public function listAllSiswa($siswaid){
         $status = false;
-        $message = "";
+        $message = "Data tidak ada";
         $result = array();
 
-        $result_tabel = Result::join('users', 'users.id', '=', 'results.siswaid')
-        ->select('results.*', 'users.nama_lengkap')
-        ->where(['siswaid' => $siswaid, 'exerciseid' => $exerciseid])->get();
+        $exercises = Exercise::all();
 
-        if(!$result_tabel->isEmpty()){
+        if(!$exercises->isEmpty()){
             $status = true;
-            $message = "Berhasil, list data result";
-            $result = $result_tabel;
+            $message = "Berhasil, list data results";
+            foreach($exercises as $key => $val_exe){
+                $results = Result::where('siswaid', $siswaid)->where('exerciseid', $val_exe['id'])->get();
+                $exercises[$key]['results'] = $results;
+            }
+            $result = $exercises;
         }
 
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));

@@ -37,8 +37,8 @@ $router->group(['prefix' => 'api'], function() use ($router){
     // END //
 
     // API Results (jawaban siswa) //
-    $router->get('results/guru/{exerciseid}', ['uses' => 'ResultsController@listAllGuru']);
-    $router->get('results/siswa/{siswaid}/{exerciseid}', ['uses' => 'ResultsController@listAllSiswa']);
+    $router->get('results/guru/{guruid}', ['uses' => 'ResultsController@listAllGuru']);
+    $router->get('results/siswa/{siswaid}', ['uses' => 'ResultsController@listAllSiswa']);
     $router->post('results/insert', ['uses' => 'ResultsController@addResult']);
     $router->post('results/addnilai', ['uses' => 'ResultsController@addNilai']);
     // END //

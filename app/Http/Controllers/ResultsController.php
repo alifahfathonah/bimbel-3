@@ -27,7 +27,7 @@ class ResultsController extends Controller
         $result = array();
 
         $exercises = Exercise::join('users', 'users.id', '=', 'exercises.guruid')
-        ->select('exercises.id', 'exercises.guruid', 'exercises.exercise', 'users.nama_lengkap')
+        ->select('exercises.id', 'exercises.guruid', 'exercises.exercise', 'users.nama_lengkap as nama_guru')
         ->where('exercises.guruid', $guruid)
         ->get();
 
@@ -35,7 +35,10 @@ class ResultsController extends Controller
             $status = true;
             $message = "Berhasil, list data results";
             foreach($exercises as $key => $val_exe){
-                $results = Result::where('exerciseid', $val_exe['id'])->get();
+                $results = Result::join('users', 'users.id', '=', 'results.siswaid')
+                ->select('results.*', 'users.nama_lengkap as nama_siswa')
+                ->where('results.exerciseid', $val_exe['id'])
+                ->get();
                 $exercises[$key]['results'] = $results;
             }
             $result = $exercises;
@@ -49,13 +52,19 @@ class ResultsController extends Controller
         $message = "Data tidak ada";
         $result = array();
 
-        $exercises = Exercise::all();
+        $exercises = Exercise::join('users', 'users.id', '=', 'exercises.guruid')
+        ->select('exercises.id', 'exercises.guruid', 'exercises.exercise', 'users.nama_lengkap as nama_guru')
+        ->get();
 
         if(!$exercises->isEmpty()){
             $status = true;
             $message = "Berhasil, list data results";
             foreach($exercises as $key => $val_exe){
-                $results = Result::where('siswaid', $siswaid)->where('exerciseid', $val_exe['id'])->get();
+                $results = Result::join('users', 'users.id', '=', 'results.siswaid')
+                ->select('results.*', 'users.nama_lengkap as nama_siswa')
+                ->where('results.siswaid', $siswaid)
+                ->where('results.exerciseid', $val_exe['id'])
+                ->get();
                 $exercises[$key]['results'] = $results;
             }
             $result = $exercises;

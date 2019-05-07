@@ -45,6 +45,7 @@ $router->group(['prefix' => 'api'], function() use ($router){
 
     // API untuk chat
     $router->get('chats/list', ['uses' => 'ChatController@listChat']);
+    $router->get('chats/lastchat', ['uses' => 'ChatController@getLastChat']);
     $router->post('chats/insert', ['uses' => 'ChatController@addChat']);
     // END //
 });

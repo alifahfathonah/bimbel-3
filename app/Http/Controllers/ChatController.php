@@ -53,4 +53,20 @@ class ChatController extends Controller
         return response()->json(array("status" => $status, "message" => $message, "result" => $result));
     }
 
+    public function getLastChat(){
+        $status = false;
+        $message = "";
+        $result = array();
+
+        $lastChat = Chat::select('id', 'created_at')->orderBy('created_at', 'desc')->first();
+
+        if($lastChat){
+            $status = true;
+            $message = "Berhasil, data row chat terakhir";
+            $result = $lastChat;
+        }
+
+        return response()->json(array("status" => $status, "message" => $message, "result" => $result));
+    }
+
 }
